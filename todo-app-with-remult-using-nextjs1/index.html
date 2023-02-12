@@ -9,7 +9,7 @@
     
     <title>
         
-            归档: 2023/1 |
+            使用 Next.js + Remult 创建一个待办事项(一) |
         
         Yakim Blog
     </title>
@@ -83,7 +83,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/archives"
                             >
                                 归档
@@ -119,7 +119,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/archives">归档</a>
                 </li>
             
@@ -144,124 +144,171 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="archive-container ">
-        
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/ionic-support-date-selection-by-range/"
-                        >Ionic日期组件实现跨天选择</a>
-                        <span class="article-date">01-10</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[7]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/nginx-visits-different-websites-according-to-ua/"
-                        >Nginx根据不同的UA显示不同的页面</a>
-                        <span class="article-date">11-10</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs6/"
-                        >使用 Next.js + Remult 创建一个待办事项(六)</a>
-                        <span class="article-date">03-02</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs5/"
-                        >使用 Next.js + Remult 创建一个待办事项(五)</a>
-                        <span class="article-date">02-25</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs4/"
-                        >使用 Next.js + Remult 创建一个待办事项(四)</a>
-                        <span class="article-date">02-18</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs3/"
-                        >使用 Next.js + Remult 创建一个待办事项(三)</a>
-                        <span class="article-date">02-15</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs2/"
-                        >使用 Next.js + Remult 创建一个待办事项(二)</a>
-                        <span class="article-date">02-13</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs1/"
-                        >使用 Next.js + Remult 创建一个待办事项(一)</a>
-                        <span class="article-date">02-12</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/manually-implement-react-infinite-scrolling/"
-                        >基于react手动实现简易infinite scrolling</a>
-                        <span class="article-date">02-02</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/manually-implement-the-es6-call-function/"
-                        >手动实现ES6中的Call函数</a>
-                        <span class="article-date">11-03</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+    <div class="post-page-container">
+        <div class="article-content-container">
 
+            <div class="article-title">
+                <span class="title-hover-animation">使用 Next.js + Remult 创建一个待办事项(一)</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Yakim Zhang</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            .article-meta-info {
+  font-size 0.8rem
+
+  .article-meta-item {
+    margin-right 0.6rem
+    color var(--text-color-4)
+
+    &:last-child {
+      margin-right 0
+    }
+  }
+
+  .article-date {
+
+    .mobile {
+      display none
+    }
+
+    +keep-tablet() {
+      .pc {
+        display none
+      }
+
+      .mobile {
+        display inline
+      }
+    }
+  }
+
+
+
+
+  .article-tags
+  .article-categories {
+    display inline
+
+    ul
+    li {
+      display inline
+    }
+
+    a {
+      color var(--text-color-4)
+
+      &:hover {
+        color var(--primary-color)
+      }
+    }
+  }
+
+  .article-tags {
+    +keep-tablet() {
+      display none
+    }
+  }
+
+  .article-min2read
+  .article-wordcount {
+    +keep-mobile() {
+      display none
+    }
+  }
+}
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>Remult 是一个全栈 CRUD 框架，它使用 TypeScript 实体作为 API，可以很好地支持 Next.js。<br>通过写一个 todolist，来学习下 Remult。</p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>创建一个 Next.js 项目。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx -y create-next-app@latest remult-nextjs-todo --typescript</span><br><span class="line">cd remult-nextjs-todo</span><br></pre></td></tr></table></figure>
+
+<p>安装 Remult</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i remult</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>打开 IDE。</p>
+<p>创建一个 src 以项目根目录命名的文件夹。</p>
+<p>server 在 src 文件夹中创建一个名为的文件夹</p>
+<p>使用以下代码在文件夹 api.ts 中创建一个文件：src/server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// src/server/api.ts</span><br><span class="line"></span><br><span class="line">import &#123; createRemultServer &#125; from &quot;remult/server&quot;;</span><br><span class="line">export const api = createRemultServer(&#123;&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>[…remult].ts 在文件夹中添加一个名为 pages/api. 此文件是一个“捕获所有” Next.jsAPI 路由，将用于处理所有 API 请求。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// pages/api/[...remult].ts</span><br><span class="line"></span><br><span class="line">import &#123; NextApiRequest, NextApiResponse &#125; from &#x27;next&#x27;</span><br><span class="line">import &#123; api &#125; from &#x27;../../src/server/api&#x27;;</span><br><span class="line"></span><br><span class="line">const handler = async (_req: NextApiRequest, res: NextApiResponse) =&gt; &#123;</span><br><span class="line">    await api.handle(_req, res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default handler</span><br></pre></td></tr></table></figure>
+
+<p><strong>启用 TypeScript 装饰器</strong></p>
+<p>将以下条目添加到文件的 compilerOptions 部分 tsconfig.json 以启用在 React 应用程序中使用装饰器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// tsconfig.json</span><br><span class="line"></span><br><span class="line">&quot;experimentalDecorators&quot;: true,</span><br><span class="line">&quot;emitDecoratorMetadata&quot;: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>启动应用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>基础的配置已经搭建好了，可以看到默认的 nextjs 页面。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/todo-app-with-remult-using-nextjs2/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(二)</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/manually-implement-react-infinite-scrolling/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">基于react手动实现简易infinite scrolling</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
     </div>
 </div>
+
 
                 
             </div>
@@ -301,6 +348,19 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -446,6 +506,12 @@ $tools-item-border-radius = 0.1rem
 
 
 <div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+        
     
 </div>
 

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yakim Zhang">
+    
+    <title>
+        
+            使用 Next.js + Remult 创建一个待办事项(六) |
+        
+        Yakim Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhangyakun.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","font_size":null,"font_family":null,"hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":false,"preload":false},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":true,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":false,"min2read":false},"img_align":"left","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Yakim Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">使用 Next.js + Remult 创建一个待办事项(六)</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Yakim Zhang</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            .article-meta-info {
+  font-size 0.8rem
+
+  .article-meta-item {
+    margin-right 0.6rem
+    color var(--text-color-4)
+
+    &:last-child {
+      margin-right 0
+    }
+  }
+
+  .article-date {
+
+    .mobile {
+      display none
+    }
+
+    +keep-tablet() {
+      .pc {
+        display none
+      }
+
+      .mobile {
+        display inline
+      }
+    }
+  }
+
+
+
+
+  .article-tags
+  .article-categories {
+    display inline
+
+    ul
+    li {
+      display inline
+    }
+
+    a {
+      color var(--text-color-4)
+
+      &:hover {
+        color var(--primary-color)
+      }
+    }
+  }
+
+  .article-tags {
+    +keep-tablet() {
+      display none
+    }
+  }
+
+  .article-min2read
+  .article-wordcount {
+    +keep-mobile() {
+      display none
+    }
+  }
+}
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="增加-auth-校验"><a href="#增加-auth-校验" class="headerlink" title="增加 auth 校验"></a>增加 auth 校验</h2><p>待办事项应用程序功能已接近完成，马上要大功告成了，还需要加一个登录角色校验。</p>
+<p>Remult 提供了一种灵活的机制，可以在应用程序 API 的各个级别放置基于代码的授权规则。为了保持代码的高内聚性，实体和字段级授权代码应该放在实体类中。</p>
+<p>Remult 在用户身份验证方面完全没有意见。您可以自由使用任何类型的身份验证机制，只需要向 Remult 提供一个实现 RemultUserInfo 接口的对象。</p>
+<p>本教程，我们将使用 NextAuth.js （打开新窗口）用于身份验证。</p>
+<h2 id="配置需要登录，才能访问"><a href="#配置需要登录，才能访问" class="headerlink" title="配置需要登录，才能访问"></a>配置需要登录，才能访问</h2><p>Task @Entity 通过修改 allowApiCrud 属性的值，此规则在装饰器中实现。此属性可以设置为接受 Remult 参数并返回 boolean 值的函数。让我们使用 Allow.authenticatedRemult 中的函数。</p>
+<p>src/shared/Task.ts</p>
+<p>import of Allow from remult.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span>(<span class="string">&quot;tasks&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">allowApiCrud</span>: <span class="title class_">Allow</span>.<span class="property">authenticated</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>添加完成后，可以测试下是否生效。<br>预期是无法创建任务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i http://localhost:3000/api/tasks</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>让我们设置 NextAuth.js 以对我们的应用程序的用户进行身份验证。</p>
+<h3 id="后端设置"><a href="#后端设置" class="headerlink" title="后端设置"></a>后端设置</h3><ol>
+<li>安装 next-auth：</li>
+</ol>
+<p>npm i next-auth</p>
+<ol start="2">
+<li> 创建以下[…nextauth].tsAPI 路由。</li>
+</ol>
+<p>pages/api/auth/[…nextauth].ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">NextAuth</span> <span class="keyword">from</span> <span class="string">&quot;next-auth&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">CredentialsProvider</span> <span class="keyword">from</span> <span class="string">&quot;next-auth/providers/credentials&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> validUsers = [</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&quot;1&quot;</span>, <span class="attr">name</span>: <span class="string">&quot;Jane&quot;</span>, <span class="attr">roles</span>: [<span class="string">&quot;admin&quot;</span>] &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&quot;2&quot;</span>, <span class="attr">name</span>: <span class="string">&quot;Steve&quot;</span>, <span class="attr">roles</span>: [] &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> secret = process.<span class="property">env</span>[<span class="string">&quot;NEXTAUTH_SECRET&quot;</span>] || <span class="string">&quot;my secret&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">NextAuth</span>(&#123;</span><br><span class="line">  <span class="attr">providers</span>: [</span><br><span class="line">    <span class="title class_">CredentialsProvider</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&quot;Username&quot;</span>,</span><br><span class="line">      <span class="attr">credentials</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: &#123;</span><br><span class="line">          <span class="attr">label</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">          <span class="attr">placeholder</span>: <span class="string">&quot;Username, try Steve or Jane&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">authorize</span>(<span class="params">credentials</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          validUsers.<span class="title function_">find</span>(<span class="function">(<span class="params">user</span>) =&gt;</span> user.<span class="property">name</span> === credentials?.<span class="property">name</span>) || <span class="literal">null</span></span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">secret</span>: secret,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这个（非常）简单的 NextAuth.js CredentialsProvider ,username 通过在预定义的有效用户列表中查找来授权用户。</p>
+<h2 id="前端设置"><a href="#前端设置" class="headerlink" title="前端设置"></a>前端设置</h2><p>pages/index.tsx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//... imports</span><br><span class="line">import &#123; signIn, signOut, useSession &#125; from &quot;next-auth/react&quot;;</span><br><span class="line"></span><br><span class="line">//... fetchTasks</span><br><span class="line"></span><br><span class="line">const Home: NextPage = () =&gt; &#123;</span><br><span class="line">  const &#123; data: session &#125; = useSession();</span><br><span class="line"></span><br><span class="line">  //,,,</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;header&gt;</span><br><span class="line">        &#123;session</span><br><span class="line">          ? (</span><br><span class="line">            &lt;&gt;</span><br><span class="line">              Hello &#123;session?.user?.name&#125;&#123;&quot; &quot;&#125;</span><br><span class="line">              &lt;button onClick=&#123;() =&gt; signOut()&#125;&gt;Sign Out&lt;/button&gt;</span><br><span class="line">            &lt;/&gt;</span><br><span class="line">          )</span><br><span class="line">          : &lt;button onClick=&#123;() =&gt; signIn()&#125;&gt;Sign In&lt;/button&gt;&#125;</span><br><span class="line">      &lt;/header&gt;</span><br><span class="line"></span><br><span class="line">      //...</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接-Remult-中间件"><a href="#连接-Remult-中间件" class="headerlink" title="连接 Remult 中间件"></a>连接 Remult 中间件</h2><p>建立身份验证流程后，将其与后端的 Remult 集成就像为 RemultgetUser 提供 UserInfo 从 Request.</p>
+<ol>
+<li>将以下 getUserFromNextAuth 函数添加到[…nextauth].ts.</li>
+</ol>
+<p>pages/api/auth/[…nextauth].ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getUserFromNextAuth</span>(<span class="params">req: NextApiRequest</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> token = <span class="keyword">await</span> <span class="title function_">getToken</span>(&#123; req, secret &#125;); <span class="comment">// import getToken from &#x27;next-auth/jwt&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> validUsers.<span class="title function_">find</span>(<span class="function">(<span class="params">u</span>) =&gt;</span> u.<span class="property">id</span> === token?.<span class="property">sub</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>getUser 将选项对象的属性设置 createRemultServer 为 getUserFromNextAuth 函数：</li>
+</ol>
+<p>src/server/api.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> api = <span class="title function_">createRemultServer</span>(&#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">getUser</span>: getUserFromNextAuth,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>待办事项应用程序现在支持登录和注销，所有访问仅限于登录用户。</p>
+<p>到此，授权功能完成，todolist 小 demo 就算完成了。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/nginx-visits-different-websites-according-to-ua/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Nginx根据不同的UA显示不同的页面</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/todo-app-with-remult-using-nextjs5/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(五)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Yakim Zhang</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    京ICP备2020039236号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        $tools-item-width = 2.2rem
+$tools-item-font-size = 1.1rem
+$tools-item-border-radius = 0.1rem
+
+
+.side-tools-container {
+  position relative
+
+  .tools-item {
+    width $tools-item-width
+    height $tools-item-width
+    margin-bottom 0.2rem
+    color var(--text-color-3)
+    font-size $tools-item-font-size
+    background var(--background-color-1)
+    border-right none
+    border-radius $tools-item-border-radius
+    box-shadow 0.1rem 0.1rem 0.2rem var(--shadow-color)
+    cursor pointer
+
+    i {
+      color var(--text-color-3)
+    }
+
+    &:hover {
+      color var(--background-color-1)
+      background var(--primary-color)
+      box-shadow 0.2rem 0.2rem 0.4rem var(--shadow-color)
+
+      i {
+        color var(--background-color-1)
+      }
+    }
+
+    +keep-tablet() {
+      width $tools-item-width * 0.9
+      height $tools-item-width * 0.9
+      margin-bottom 0.2rem
+      font-size $tools-item-font-size * 0.9
+    }
+
+    &.rss {
+
+      a {
+        width 100%
+        height 100%
+        border-radius $tools-item-border-radius
+
+        &:hover {
+          color var(--background-color-1)
+          background var(--primary-color)
+          box-shadow 0.2rem 0.2rem 0.4rem var(--shadow-color)
+        }
+      }
+    }
+  }
+
+
+  .side-tools-list {
+    transform translateX(100%)
+    opacity 0
+    transition-t("transform, opacity", "0, 0", "0.2, 0.2", "linear, linear")
+
+    &.show {
+      transform translateX(0)
+      opacity 1
+    }
+  }
+
+
+  .exposed-tools-list {
+
+    if (hexo-config('style.scroll.percent') == true) {
+      .tool-scroll-to-top {
+        display none
+
+        &.show {
+          display flex
+        }
+
+        &:hover {
+
+          .percent {
+            display none
+          }
+
+          .arrow-up {
+            display flex
+          }
+        }
+
+        .arrow-up {
+          display none
+        }
+
+        .percent {
+          display flex
+          font-size 1rem
+        }
+      }
+    }
+  }
+}
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/code-block.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+        
+    
+</div>
+
+
+
+</body>
+</html>

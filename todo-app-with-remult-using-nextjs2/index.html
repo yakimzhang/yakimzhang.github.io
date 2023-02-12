@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yakim Zhang">
+    
+    <title>
+        
+            使用 Next.js + Remult 创建一个待办事项(二) |
+        
+        Yakim Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhangyakun.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","font_size":null,"font_family":null,"hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":false,"preload":false},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":true,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":false,"min2read":false},"img_align":"left","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Yakim Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">使用 Next.js + Remult 创建一个待办事项(二)</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Yakim Zhang</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            .article-meta-info {
+  font-size 0.8rem
+
+  .article-meta-item {
+    margin-right 0.6rem
+    color var(--text-color-4)
+
+    &:last-child {
+      margin-right 0
+    }
+  }
+
+  .article-date {
+
+    .mobile {
+      display none
+    }
+
+    +keep-tablet() {
+      .pc {
+        display none
+      }
+
+      .mobile {
+        display inline
+      }
+    }
+  }
+
+
+
+
+  .article-tags
+  .article-categories {
+    display inline
+
+    ul
+    li {
+      display inline
+    }
+
+    a {
+      color var(--text-color-4)
+
+      &:hover {
+        color var(--primary-color)
+      }
+    }
+  }
+
+  .article-tags {
+    +keep-tablet() {
+      display none
+    }
+  }
+
+  .article-min2read
+  .article-wordcount {
+    +keep-mobile() {
+      display none
+    }
+  }
+}
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>上篇搭建来基础配置，本篇来定义实体类。</p>
+<p>在 Task.ts 中定义实体类，包含 id，标题，是否完成。</p>
+<p>Task 将使用实体类：</p>
+<ul>
+<li>作为客户端代码的模型类</li>
+<li>作为服务器端代码的模型类</li>
+<li>通过 remult 生成 API 端点、API 查询和数据库命令</li>
+</ul>
+<p>我们正在创建的 Task 实体类将有一个自动生成的 UUIDid 字段，一个 title 字段和一个 completed 字段。实体的 API 路由（“任务”）将包括所有 CRUD 操作的端点。</p>
+<h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><ol>
+<li><p>shared 在文件夹下创建一个文件夹 src。此文件夹将包含前端和后端之间共享的代码。</p>
+</li>
+<li><p>Task.ts 在文件夹中创建一个文件 src/shared/，代码如下：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// src/shared/Task.ts</span><br><span class="line"></span><br><span class="line">import &#123; Entity, Fields &#125; from &quot;remult&quot;;</span><br><span class="line"></span><br><span class="line">@Entity(&quot;tasks&quot;, &#123;</span><br><span class="line">    allowApiCrud: true</span><br><span class="line">&#125;)</span><br><span class="line">export class Task &#123;</span><br><span class="line">    @Fields.uuid()</span><br><span class="line">    id!: string;</span><br><span class="line"></span><br><span class="line">    @Fields.string()</span><br><span class="line">    title = &#x27;&#x27;;</span><br><span class="line"></span><br><span class="line">    @Fields.boolean()</span><br><span class="line">    completed = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在服务器的 api 模块中，通过将实体添加到您传递给方法的对象来向 TaskRemult 注册实体：entities: [Task]optionscreateRemultServer()</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//src/server/api.ts</span><br><span class="line"></span><br><span class="line">import &#123; createRemultServer &#125; from &quot;remult/server&quot;;</span><br><span class="line">import &#123; Task &#125; from &quot;../shared/Task&quot;;</span><br><span class="line"></span><br><span class="line">export const api = createRemultServer(&#123;</span><br><span class="line">    entities: [Task]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>@Entity 装饰器告诉 Remult 这个类是一个实体类。装饰器接受一个 key 参数（用于命名 API 路由并作为默认数据库集合/表名称），以及一个 options 用于定义与实体相关的属性和操作的参数，将在本教程的下一节中讨论。</p>
+<p>为了最初允许任务的所有 CRUD 操作，我们将选项 allowApiCrud 设置为 true。</p>
+<p>装饰@Fields.uuid 器告诉 Remult 使用自动生成一个 id uuid。我们将此属性标记为可选，这样我们就可以创建新对象而无需首先 Task 分配一个对象，并让 Remult 在对象的数据存储到后端数据库之前生成一个对象。id</p>
+<p>@Fields.string 装饰器告诉 Remult 该 title 属性是 type 的实体数据字段 String。此装饰器还用于定义与字段相关的属性和操作，将在本教程的下一节中讨论，属性@Fields.boolean 也是如此 completed。</p>
+<h2 id="建立一些测试数据"><a href="#建立一些测试数据" class="headerlink" title="建立一些测试数据"></a>建立一些测试数据</h2><p>现在 Task 定义了实体，我们可以用它来为数据库准备一些测试数据。</p>
+<p>将突出显示的代码行添加到 src/server/api.ts.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// src/server/api.ts</span><br><span class="line"></span><br><span class="line">import &#123; createRemultServer &#125; from &quot;remult/server&quot;;</span><br><span class="line">import &#123; Task &#125; from &quot;../shared/Task&quot;;</span><br><span class="line"></span><br><span class="line">export const api = createRemultServer(&#123;</span><br><span class="line">    entities: [Task],</span><br><span class="line">    initApi: async remult =&gt; &#123;</span><br><span class="line">        const taskRepo = remult.repo(Task);</span><br><span class="line">        if (await taskRepo.count() === 0) &#123;</span><br><span class="line">            await taskRepo.insert([</span><br><span class="line">                &#123; title: &quot;Task a&quot; &#125;,</span><br><span class="line">                &#123; title: &quot;Task b&quot;, completed: true &#125;,</span><br><span class="line">                &#123; title: &quot;Task c&quot; &#125;,</span><br><span class="line">                &#123; title: &quot;Task d&quot; &#125;,</span><br><span class="line">                &#123; title: &quot;Task e&quot;, completed: true &#125;</span><br><span class="line">            ]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在 initApi 建立数据库连接并且服务器准备好执行初始化操作之后，回调只会被调用一次。</p>
+<p>taskRepo 是用于获取和创建实体对象的 Remult Repository 对象。Task</p>
+<p>initApi 如果当前 count 为零，中的代码只是向数据库添加五个新任务。</p>
+<p>保存更改将导致服务器重新启动并使用测试数据为数据库播种。tasks 在 <a class="link"   target="_blank" rel="noopener" href="http://localhost:3000/api/tasks" >http://localhost:3000/api/tasks<i class="fas fa-external-link-alt"></i></a> 导航到 API 路由 （打开新窗口）查看数据。</p>
+<p>我们首先将实体数据存储在后端 JSON 文件中。请注意，db 已在根文件夹下创建了一个 tasks.json 文件夹，其中包含一个包含创建的任务的文件。</p>
+<h2 id="显示任务列表"><a href="#显示任务列表" class="headerlink" title="显示任务列表"></a>显示任务列表</h2><p>让我们通过在 React 组件中显示现有任务列表来开始开发 Web 应用程序。</p>
+<p>将 的内容替换为 pages/index.tsx 以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// pages/index.tsx</span><br><span class="line"></span><br><span class="line">import type &#123; NextPage &#125; from &#x27;next&#x27;</span><br><span class="line">import &#123; useEffect, useState &#125; from &#x27;react&#x27;;</span><br><span class="line">import &#123; remult &#125; from &#x27;remult&#x27;;</span><br><span class="line">import &#123; Task &#125; from &#x27;../src/shared/Task&#x27;;</span><br><span class="line"></span><br><span class="line">async function fetchTasks() &#123;</span><br><span class="line">  return remult.repo(Task).find();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const Home: NextPage = () =&gt; &#123;</span><br><span class="line">  const [tasks, setTasks] = useState&lt;Task[]&gt;([]);</span><br><span class="line"></span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    fetchTasks().then(setTasks);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;main&gt;</span><br><span class="line">        &#123;tasks.map(task =&gt; (</span><br><span class="line">          &lt;div key=&#123;task.id&#125;&gt;</span><br><span class="line">            &lt;input type=&quot;checkbox&quot; checked=&#123;task.completed&#125; /&gt;</span><br><span class="line">            &#123;task.title&#125;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/main&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<p>以下是代码片段不同部分的快速概览：</p>
+<p>该 fetchTasks 函数使用 Remult 存储库的 find 方法从服务器获取任务。<br>tasks 是一个任务数组 React 状态，用于保存任务列表。<br>React 的 useEffect hook 用于 fetchTasks 在 React 组件加载时调用一次。<br>浏览器刷新后，任务列表出现。</p>
+<p>#添加样式<br>styles/globals.css 或者，通过使用此 CSS 文件替换 的内容，使应用看起来更好一些 （打开新窗口）.</p>
+<h2 id="静态生成和服务器端渲染"><a href="#静态生成和服务器端渲染" class="headerlink" title="静态生成和服务器端渲染"></a>静态生成和服务器端渲染</h2><p>Next.js 允许使用服务器端渲染 (SSR)或静态站点生成 (SSG)预渲染页面内容。</p>
+<p>要从 getServerSideProp 或 getStaticProps 访问 remult 实例，您需要编写以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; api &#125; from &#x27;../src/server/api&#x27;;</span><br><span class="line"></span><br><span class="line">export const getServerSideProps: GetServerSideProps = async (context) =&gt; &#123;</span><br><span class="line">  const remult = await api.getRemult(context);</span><br><span class="line">  return &#123; props: &#123;&#125; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后您可以使用上面的代码片段获取数据 fetchTasks。</p>
+<p>您的 pages/index.tsx 内容现在应该如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import type &#123; NextPage &#125; from &#x27;next&#x27;</span><br><span class="line">import &#123; useEffect, useState &#125; from &#x27;react&#x27;;</span><br><span class="line">import &#123; Task &#125; from &#x27;../src/shared/Task&#x27;;</span><br><span class="line">import &#123; api &#125; from &#x27;../src/server/api&#x27;;</span><br><span class="line"></span><br><span class="line">type HomeProps = &#123;</span><br><span class="line">  tasks: Task[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const Home: NextPage = (&#123; tasks &#125;: HomeProps) =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;main&gt;</span><br><span class="line">        &#123;tasks.map(task =&gt; (</span><br><span class="line">          &lt;div key=&#123;task.id&#125;&gt;</span><br><span class="line">            &lt;input type=&quot;checkbox&quot; checked=&#123;task.completed&#125; /&gt;</span><br><span class="line">            &#123;task.title&#125;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/main&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const getServerSideProps: GetServerSideProps = async (context) =&gt; &#123;</span><br><span class="line">  // Get remult instance</span><br><span class="line">  const remult = await api.getRemult(context);</span><br><span class="line"></span><br><span class="line">  // Find all tasks</span><br><span class="line">  const tasks = await remult.repo(Task).find();</span><br><span class="line"></span><br><span class="line">  // Serialize tasks into plain object</span><br><span class="line">  const tasksJson = JSON.parse(JSON.stringify(tasks));</span><br><span class="line"></span><br><span class="line">  return &#123; props: &#123; tasks: tasksJson &#125; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Home</span><br></pre></td></tr></table></figure>
+
+<p>注意 const tasksJson = JSON.parse(JSON.stringify(tasks));</p>
+<p>在 Next.js 中，您只能使用以下方式将可序列化对象传递给 props：</p>
+<p>JSON.parse(JSON.stringify(data))<br>entityRef 的 toApiJson()方法，或<br>使用库配置 nextjs next-superjson</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>实体建立完成，下篇讲下如何利用 Remult 实现分页、排序和过滤。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/todo-app-with-remult-using-nextjs3/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(三)</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/todo-app-with-remult-using-nextjs1/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(一)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Yakim Zhang</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    京ICP备2020039236号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        $tools-item-width = 2.2rem
+$tools-item-font-size = 1.1rem
+$tools-item-border-radius = 0.1rem
+
+
+.side-tools-container {
+  position relative
+
+  .tools-item {
+    width $tools-item-width
+    height $tools-item-width
+    margin-bottom 0.2rem
+    color var(--text-color-3)
+    font-size $tools-item-font-size
+    background var(--background-color-1)
+    border-right none
+    border-radius $tools-item-border-radius
+    box-shadow 0.1rem 0.1rem 0.2rem var(--shadow-color)
+    cursor pointer
+
+    i {
+      color var(--text-color-3)
+    }
+
+    &:hover {
+      color var(--background-color-1)
+      background var(--primary-color)
+      box-shadow 0.2rem 0.2rem 0.4rem var(--shadow-color)
+
+      i {
+        color var(--background-color-1)
+      }
+    }
+
+    +keep-tablet() {
+      width $tools-item-width * 0.9
+      height $tools-item-width * 0.9
+      margin-bottom 0.2rem
+      font-size $tools-item-font-size * 0.9
+    }
+
+    &.rss {
+
+      a {
+        width 100%
+        height 100%
+        border-radius $tools-item-border-radius
+
+        &:hover {
+          color var(--background-color-1)
+          background var(--primary-color)
+          box-shadow 0.2rem 0.2rem 0.4rem var(--shadow-color)
+        }
+      }
+    }
+  }
+
+
+  .side-tools-list {
+    transform translateX(100%)
+    opacity 0
+    transition-t("transform, opacity", "0, 0", "0.2, 0.2", "linear, linear")
+
+    &.show {
+      transform translateX(0)
+      opacity 1
+    }
+  }
+
+
+  .exposed-tools-list {
+
+    if (hexo-config('style.scroll.percent') == true) {
+      .tool-scroll-to-top {
+        display none
+
+        &.show {
+          display flex
+        }
+
+        &:hover {
+
+          .percent {
+            display none
+          }
+
+          .arrow-up {
+            display flex
+          }
+        }
+
+        .arrow-up {
+          display none
+        }
+
+        .percent {
+          display flex
+          font-size 1rem
+        }
+      }
+    }
+  }
+}
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/code-block.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+        
+    
+</div>
+
+
+
+</body>
+</html>

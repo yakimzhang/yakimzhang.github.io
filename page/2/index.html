@@ -9,8 +9,6 @@
     
     <title>
         
-            归档: 2020 |
-        
         Yakim Blog
     </title>
     
@@ -52,7 +50,7 @@
 
     
 
-    <div class="page-main-content">
+    <div class="page-main-content is-home">
 
         <div class="page-main-content-top">
             
@@ -75,7 +73,7 @@
                 <ul class="menu-list">
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/"
                             >
                                 首页
@@ -83,7 +81,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/archives"
                             >
                                 归档
@@ -114,12 +112,12 @@
         <ul class="drawer-menu-list">
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/">首页</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/archives">归档</a>
                 </li>
             
@@ -143,132 +141,61 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="archive-container ">
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
         
-<div class="archive-list-container">
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/manually-implement-the-new-method/">
+                        手动实现javascript new方法
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        为了深入理解 javascript，自己实现 new 的过程
+先来看看官方 new 的定义
+
+ Creates a blank, plain JavaScript object. For convenience, let’s call it newI...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Oct 11 2020 23:12:39 GMT+0800">
+                2023-02-12
+            </span>
+        </span>
+        
+                
+    </div>
+
+    <a class="read-more" href="/manually-implement-the-new-method/">阅读全文&nbsp;<i
+                class="fas fa-angle-right"></i></a>
+</div>
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/ionic-support-date-selection-by-range/"
-                        >Ionic日期组件实现跨天选择</a>
-                        <span class="article-date">01-10</span>
-                    </li>
-                
-            </ul>
-        </section>
+        <a class="prev btn"
+           href="/"
+        >上一页</a>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[7]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/nginx-visits-different-websites-according-to-ua/"
-                        >Nginx根据不同的UA显示不同的页面</a>
-                        <span class="article-date">11-10</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs6/"
-                        >使用 Next.js + Remult 创建一个待办事项(六)</a>
-                        <span class="article-date">03-02</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs5/"
-                        >使用 Next.js + Remult 创建一个待办事项(五)</a>
-                        <span class="article-date">02-25</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs4/"
-                        >使用 Next.js + Remult 创建一个待办事项(四)</a>
-                        <span class="article-date">02-18</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs3/"
-                        >使用 Next.js + Remult 创建一个待办事项(三)</a>
-                        <span class="article-date">02-15</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs2/"
-                        >使用 Next.js + Remult 创建一个待办事项(二)</a>
-                        <span class="article-date">02-13</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/todo-app-with-remult-using-nextjs1/"
-                        >使用 Next.js + Remult 创建一个待办事项(一)</a>
-                        <span class="article-date">02-12</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/manually-implement-react-infinite-scrolling/"
-                        >基于react手动实现简易infinite scrolling</a>
-                        <span class="article-date">02-02</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/manually-implement-the-es6-call-function/"
-                        >手动实现ES6中的Call函数</a>
-                        <span class="article-date">11-03</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/manually-implement-the-new-method/"
-                        >手动实现javascript new方法</a>
-                        <span class="article-date">10-11</span>
-                    </li>
-                
-            </ul>
-        </section>
+
     
 </div>
 
     </div>
 </div>
+
 
                 
             </div>
@@ -357,6 +284,7 @@
     
 
 </main>
+
 
 
 

@@ -9,7 +9,7 @@
     
     <title>
         
-            使用 Next.js + Remult 创建一个待办事项(五) |
+            Javascript中语句和表达式有什么区别 |
         
         Yakim Blog
     </title>
@@ -148,7 +148,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">使用 Next.js + Remult 创建一个待办事项(五)</span>
+                <span class="title-hover-animation">Javascript中语句和表达式有什么区别</span>
             </div>
 
             
@@ -168,8 +168,8 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2022-02-25 14:13:34</span>
-        <span class="mobile">2022-02-25 14:13</span>
+        <span class="pc">2021-03-06 12:23:12</span>
+        <span class="mobile">2021-03-06 12:23</span>
     </span>
     
         <span class="article-update-date article-meta-item">
@@ -193,30 +193,34 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <h2 id="增加校验"><a href="#增加校验" class="headerlink" title="增加校验"></a>增加校验</h2><p>在客户端和服务器端都需要验证用户输入的数据，会导致违反 DRY 设计原则。使用 Remult，验证代码可以放在实体类中，Remult 将在前端和相关 API 请求上运行验证逻辑。</p>
-<h2 id="验证标题字段"><a href="#验证标题字段" class="headerlink" title="验证标题字段"></a>验证标题字段</h2><p>任务标题是必需的。让我们为此规则添加有效性检查，并在 UI 中显示相应的错误消息。</p>
+                <p>平常你可能不在刻意区分语句和表达式，但在 React 中你会意识到二者的不同， JSX 语法中，花括号中 { } 必须是表达式，而不能是语句。</p>
+<p>下面我们一起看下他们的区别。</p>
+<h2 id="表达式（Expressions）"><a href="#表达式（Expressions）" class="headerlink" title="表达式（Expressions）"></a>表达式（Expressions）</h2><p>一个表达式它是 javascript 代码，它会生成一些值。<br>例如：</p>
+<ul>
+<li>1 → 生成 1</li>
+<li>“hello” → 生成 “hello”</li>
+<li>5 * 10 → 生成 50</li>
+<li>num &gt; 100 → 生成 = true or false</li>
+<li>isHappy ? “🙂” : “🙁” → 生成表情</li>
+<li>[1, 2, 3].pop() → 生成 3</li>
+</ul>
+<h2 id="语句（Statements）"><a href="#语句（Statements）" class="headerlink" title="语句（Statements）"></a>语句（Statements）</h2><p>语句也是 javascript 代码，每条语句都会让计算机处理一些事<br>例如，下面这些是语句</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hi = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (hi &gt; <span class="number">10</span>) &#123;</span><br><span class="line">  <span class="comment">// More statements here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;Something exploded!&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>语句可以类比为钢架结构，表达式类比填充物。钢架结构可以填充砖块，语句中可以填充表达式。<br>如下案例，等于符号右边是表达式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let hi = //表达式</span><br></pre></td></tr></table></figure>
+
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><ol>
+<li>表达式会返回一个值，而语句不会。</li>
+<li>语句可以包含表达式</li>
+</ol>
+<p>语句会做一些事情，表达式会计算一个值。</p>
+<p>如何判断呢？</p>
 <ol>
-<li>在 Task 实体类中，修改字段 Fields.string 的装饰器 title 以包含对象文字参数并将对象的 validate 属性设置为 Validators.required。</li>
+<li>看他能否放在等号右侧。</li>
+<li>能否打印 console.log()</li>
 </ol>
-<p>src/shared/Task.ts</p>
-<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Fields</span>.<span class="title function_">string</span>(&#123;</span><br><span class="line">    <span class="attr">validate</span>: <span class="title class_">Validators</span>.<span class="property">required</span></span><br><span class="line">&#125;)</span><br><span class="line">title = <span class="string">&#x27;&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>导入验证器</strong></p>
-<p>Validators 此代码需要添加 from 的导入 remult。</p>
-<ol start="2">
-<li>在 home/index.tsx 模板中，修改 saveTask 捕获异常的函数。</li>
-</ol>
-<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">saveTask</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> savedTask = <span class="keyword">await</span> remult.<span class="title function_">repo</span>(<span class="title class_">Task</span>).<span class="title function_">save</span>(task);</span><br><span class="line">    <span class="title function_">setTasks</span>(tasks.<span class="title function_">map</span>(<span class="function">(<span class="params">t</span>) =&gt;</span> (t === task ? savedTask : t)));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (<span class="attr">error</span>: <span class="built_in">any</span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(error.<span class="property">message</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>手动刷新浏览器后，尝试创建一个新的 task 或保存一个空标题的现有浏览器 -显示“不应为空”错误消息。</p>
-<h2 id="隐式服务器端验证"><a href="#隐式服务器端验证" class="headerlink" title="隐式服务器端验证"></a>隐式服务器端验证</h2><p>我们添加的验证代码由服务器端的 Remult 调用，验证修改 title 字段。</p>
-<p>向 API 路由发出以下 POSThttp 请求 <a class="link"   target="_blank" rel="noopener" href="http://localhost:3000/api/tasks%EF%BC%8C%E6%8F%90%E4%BE%9B%E6%97%A0%E6%95%88%E7%9A%84%E6%A0%87%E9%A2%98%E3%80%82" >http://localhost:3000/api/tasks，提供无效的标题。<i class="fas fa-external-link-alt"></i></a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i http://localhost:3000/api/tasks -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&quot;&#123;\&quot;title\&quot;: \&quot;\&quot;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>返回一个 http 错误，验证错误文本包含在响应正文中，</p>
-<h2 id="自定义验证"><a href="#自定义验证" class="headerlink" title="自定义验证"></a>自定义验证</h2><p>validate 字段装饰器的第一个参数的属性可以 Remult 设置为箭头函数，该函数将被调用以验证前端和后端的输入。</p>
-<p>src/shared/Task.ts</p>
-<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Fields</span>.<span class="property">string</span>&lt;<span class="title class_">Task</span>&gt;(&#123;</span><br><span class="line">    <span class="attr">validate</span>: <span class="function">(<span class="params">task</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (task.<span class="property">title</span>.<span class="property">length</span> &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="string">&quot;Too Short&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">title = <span class="string">&#x27;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="为什么-JSX-的-中只能是表达式呢？"><a href="#为什么-JSX-的-中只能是表达式呢？" class="headerlink" title="为什么 JSX 的 { } 中只能是表达式呢？"></a>为什么 JSX 的 { } 中只能是表达式呢？</h2><p>因为JSX是一种语法糖，它会将代码转变成React.createElement 去创建DOM节点，DOM节点上需要的是具体的值，而不是语句。</p>
 
             </div>
 
@@ -230,13 +234,13 @@
                         <div class="article-prev">
                             <a class="prev"
                                rel="prev"
-                               href="/todo-app-with-remult-using-nextjs6/"
+                               href="/request-multiple-apis-in-javascripvs/"
                             >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                                 <span class="title flex-center">
-                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(六)</span>
+                                <span class="post-nav-title-item">如何在javascript中发起多个请求</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                             </a>
@@ -246,10 +250,10 @@
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/todo-app-with-remult-using-nextjs4/"
+                               href="/manually-implement-react-infinite-scrolling/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(四)</span>
+                                <span class="post-nav-title-item">基于react手动实现简易infinite scrolling</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
@@ -268,7 +272,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E6%A0%A1%E9%AA%8C"><span class="nav-text">增加校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%A0%87%E9%A2%98%E5%AD%97%E6%AE%B5"><span class="nav-text">验证标题字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%AA%8C%E8%AF%81"><span class="nav-text">隐式服务器端验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81"><span class="nav-text">自定义验证</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88Expressions%EF%BC%89"><span class="nav-text">表达式（Expressions）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E5%8F%A5%EF%BC%88Statements%EF%BC%89"><span class="nav-text">语句（Statements）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-text">对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-JSX-%E7%9A%84-%E4%B8%AD%E5%8F%AA%E8%83%BD%E6%98%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%91%A2%EF%BC%9F"><span class="nav-text">为什么 JSX 的 { } 中只能是表达式呢？</span></a></li></ol>
     </div>
 </div>
 

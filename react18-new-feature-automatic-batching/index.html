@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yakim Zhang">
+    
+    <title>
+        
+            一起学习React18新特性-自动批处理（Automatic Batching） |
+        
+        Yakim Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhangyakun.com","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","font_size":null,"font_family":null,"hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":false,"preload":false},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":false,"auto":true,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":false,"wordcount":false,"min2read":false},"img_align":"left","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Yakim Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">一起学习React18新特性-自动批处理（Automatic Batching）</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Yakim Zhang</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-09-01 23:20:34</span>
+        <span class="mobile">2022-09-01 23:20</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+
+    </span>
+    
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>在 React 18 之前，React 就已经对 state 更新进行批处理了，仅支持浏览器事件的批处理，但是不包含 Promise，setTimeout，native event handlers。本次更新，对批处理进行了改进，所有状态都会启动批处理。</p>
+<h2 id="先来看看在-React17-中进行的批处理"><a href="#先来看看在-React17-中进行的批处理" class="headerlink" title="先来看看在 React17 中进行的批处理"></a>先来看看在 React17 中进行的批处理</h2><p>下面的代码，当点击 Click Me！ 执行 handleOnClick()函数后，会将 2 个状态更新。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [additionCount, setAdditionCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [subtractionCount, setSubtractionCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Component Rendering&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleOnClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setAdditionCount</span>(additionCount + <span class="number">1</span>);</span><br><span class="line">    <span class="title function_">setSubtractionCount</span>(subtractionCount - <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ﻿</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">width:</span> &quot;<span class="attr">50</span>%&quot;, <span class="attr">height:</span> &quot;<span class="attr">30</span>%&quot; &#125;&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          handleOnClick();</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        Click Me!</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>Add Count: &#123;additionCount&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>﻿<span class="tag">&lt;<span class="name">div</span>&gt;</span>Substraction Count: &#123;substractionCount&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意看控制台，console.log(“Component Rendering”) 只打印了一次，说明只发生了一次更新。</p>
+<p>这说明 react 已经把 2 次 setState 合并成了一次，进行了批处理。<br><img src="../images/content/3fsfds110157.png" alt="输出"></p>
+<h2 id="再来看看-React17-不能进行批处理的情况"><a href="#再来看看-React17-不能进行批处理的情况" class="headerlink" title="再来看看 React17 不能进行批处理的情况"></a>再来看看 React17 不能进行批处理的情况</h2><p>当遇到非浏览器事件时，批处理就无效了，下面的代码以 fetch 异步事件为例。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步事件</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">handleOnClickAsync</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="title function_">fetch</span>(“<span class="attr">https</span>:<span class="comment">//jsonplaceholder.typicode.com/todos/1&quot;).then(() =&gt; &#123;</span></span><br><span class="line">    <span class="title function_">setAdditionCount</span>(additionCount + <span class="number">1</span>);</span><br><span class="line">    <span class="title function_">setSubstractionCount</span>(substractionCount — <span class="number">1</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// html</span></span><br><span class="line"> <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">width:</span> “<span class="attr">50</span>%”, <span class="attr">height:</span> “<span class="attr">30</span>%” &#125;&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">         <span class="attr">onClick</span> =<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">           handleOnClickAsync();</span></span><br><span class="line"><span class="language-xml">         &#125;&#125;</span></span><br><span class="line"><span class="language-xml"> &gt;</span></span><br><span class="line"><span class="language-xml">    Click Me Async Call!</span></span><br><span class="line"><span class="language-xml"> <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到控制台中，输出了 2 次，说明页面刷新了 2 次，react 没有进行合并批处理。<br><img src="../images/content/3423fdsfsd111440.png" alt="输出"></p>
+<p><strong>这样会有什么问题呢</strong></p>
+<p>对于小应用来说，重新渲染不会产生重大影响。但是，随着对于大型项目，嵌套组件的数量会很多。因此，如果父组件执行状态更新，则整个组件树将在每次状态更新时重新渲染，这样会拖慢应用的速度。</p>
+<h2 id="React-18-改进了批处理"><a href="#React-18-改进了批处理" class="headerlink" title="React 18 改进了批处理"></a>React 18 改进了批处理</h2><p>在 React v18 中从任何位置调用的状态更新将默认进行批处理。这将批处理状态更新，包括浏览器事件处理程序、异步操作、超时和间隔。</p>
+<p>下面看一个案例，安装最新的 react 版本。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">&quot;./logo.svg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [clicked, setClicked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 18 Application Re-Rendering&quot;</span>);</span><br><span class="line">  <span class="comment">// 点击事件</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 1 Re-Render</span></span><br><span class="line">    <span class="title function_">setClicked</span>(!clicked);</span><br><span class="line">    <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异步</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleAsyncClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">fetch</span>(<span class="string">&quot;https://jsonplaceholder.typicode.com/todos/1&quot;</span>).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// trigger 1 re-render due to React 18 Improved Batching</span></span><br><span class="line">      <span class="title function_">setClicked</span>(!clicked);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// timeout/interval</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleTimeOutClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// trigger 1 re-render due to React 18 Improved Batching</span></span><br><span class="line">      <span class="title function_">setClicked</span>(!clicked);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ﻿&#123;&quot; &quot;&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">header</span> <span class="attr">className</span>=<span class="string">&quot;App-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        ﻿<span class="tag">&lt;<span class="name">div</span>&gt;</span> Count: &#123;count&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span>﻿<span class="tag">&lt;<span class="name">div</span>&gt;</span> Clicked: &#123;clicked&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span>﻿</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span> Event Handler <span class="tag">&lt;/<span class="name">button</span>&gt;</span>﻿&#123;&quot; &quot;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleAsyncClick&#125;</span>&gt;</span> Async Handler <span class="tag">&lt;/<span class="name">button</span>&gt;</span>﻿</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleTimeOutClick&#125;</span>&gt;</span> Timeout Handler <span class="tag">&lt;/<span class="name">button</span>&gt;</span>﻿</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ﻿</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码，每个事件处理程序中都会发生两个状态更新。<br>分别点击三个按钮，可以看到在浏览器控制台中打印三个日志，而不是 6 个日志，说明 react 进行了合并批处理。<br><img src="../images/content/ds23fa112442.png" alt="输出"></p>
+<h2 id="阻止批处理"><a href="#阻止批处理" class="headerlink" title="阻止批处理"></a>阻止批处理</h2><p>某些情况下不能使用批处理，例如第二个状态的更新依赖第一个状态的结果。</p>
+<p>react 提供了 flushSync 来实现阻止批处理。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; flushSync &#125; <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;update&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [clicked, setClicked] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleClick</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">flushSync</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="title function_">setClicked</span>(<span class="literal">true</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      ﻿<span class="tag">&lt;<span class="name">div</span>&gt;</span> Count1: &#123;count&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span> Event Handler <span class="tag">&lt;/<span class="name">button</span>&gt;</span>﻿&#123;&quot; &quot;&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，当点击 Event Handler 时，输出了 2 次 update，说明 flushSync 中的状态更新被单独执行了，没有合并。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/react18-new-feature-suspense/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">一起学习React18新特性-Suspense</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/todo-app-with-remult-using-nextjs6/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">使用 Next.js + Remult 创建一个待办事项(六)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%9D%A5%E7%9C%8B%E7%9C%8B%E5%9C%A8-React17-%E4%B8%AD%E8%BF%9B%E8%A1%8C%E7%9A%84%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-text">先来看看在 React17 中进行的批处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E6%9D%A5%E7%9C%8B%E7%9C%8B-React17-%E4%B8%8D%E8%83%BD%E8%BF%9B%E8%A1%8C%E6%89%B9%E5%A4%84%E7%90%86%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">再来看看 React17 不能进行批处理的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-18-%E6%94%B9%E8%BF%9B%E4%BA%86%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-text">React 18 改进了批处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-text">阻止批处理</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Yakim Zhang</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/code-block.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>
